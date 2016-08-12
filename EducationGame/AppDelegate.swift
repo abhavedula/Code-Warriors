@@ -7,15 +7,36 @@
 //
 
 import UIKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+        
+    var backgroundMusicPlayer = AVAudioPlayer()
+    
+    func playBackgroundMusic(filename: String) {
+        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: "mp3")
+        guard let newURL = url else {
+            print("Could not find file: \(filename)")
+            return
+        }
+        do {
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOfURL: newURL)
+            backgroundMusicPlayer.numberOfLoops = -1
+            backgroundMusicPlayer.prepareToPlay()
+            backgroundMusicPlayer.play()
+        } catch let error as NSError {
+            print(error.description)
+        }
+    }
+
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         return true
     }
 
