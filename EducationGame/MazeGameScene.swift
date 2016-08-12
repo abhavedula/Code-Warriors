@@ -1274,7 +1274,7 @@ class MazeGameScene: SKScene, SKPhysicsContactDelegate {
     func loadMaze() {
         var r = 0
         
-        let rand = 2 //Int(arc4random_uniform(3) + 1)
+        let rand = Int(arc4random_uniform(3) + 1)
         
         if let levelPath = NSBundle.mainBundle().pathForResource("maze\(rand)", ofType: "txt") {
             
